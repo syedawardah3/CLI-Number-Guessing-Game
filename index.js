@@ -1,24 +1,21 @@
 #! /usr/bin/env node
 import inquirer from "inquirer";
-// 1) computer will generate a random number 
-// 2) user input for guessing number
-//3) compair user input with generated number and show result
-const randomNumber = Math.floor(Math.random() * 10 + 1);
-console.log("wellcome to my number guessing game");
-// console.log(randomNumber)
-const answer = await inquirer.prompt([
-    {
-        name: "userGuessNumber",
+import chalk from "chalk";
+console.log(chalk.redBright(`
+-X-X-X-X-X-X-X-X-X-X-X-X-X-X-X-X-X-X-X-X-X-X-X-X-X-X-X-X-X-X-X-X-X-X-X-X-X-X-X-X
+\t\t || Welcome To Wardah Number Guessing Game`));
+const systemGeneratedNumber = Math.floor(Math.random() * 10);
+const answers = await inquirer.prompt([{
         type: "number",
-        message: "please  guess a number between 1 to 6 ",
-    },
-]);
-console.log(answer);
-// if condition is true then will print if one console
-if (answer.userGuessNumber === randomNumber) {
-    console.log("congratulations! you guessed right number");
-    // if condition is false then will print else one console
+        name: "userGuess",
+        message: "Guess a number between 1 to 10 and write it: "
+    }]);
+const { userGuess } = answers;
+console.log(chalk.blueBright.bgWhiteBright(`Guessed No: ${userGuess} , Correct Answer is: ${systemGeneratedNumber}`));
+if (userGuess === systemGeneratedNumber) {
+    console.log(chalk.redBright("Correct Answer! Congratulations You have Win"));
 }
 else {
-    console.log("you guessed wrong number");
+    console.log(chalk.yellowBright("Wrong Answer! Better Luck Next Time"));
 }
+;
